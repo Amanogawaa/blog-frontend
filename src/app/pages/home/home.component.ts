@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { BlogComponent } from '../blog/blog.component';
 import { BlogCardComponent } from '../blog-card/blog-card.component';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [BlogComponent, BlogCardComponent],
+  imports: [BlogComponent, BlogCardComponent, NavbarComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
