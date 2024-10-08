@@ -1,0 +1,186 @@
+<aside aria-label="Related articles" class="py-8 bg-[#141414] max-h-screen">
+  <div class="px-4 mx-auto max-w-screen-xl max-h-screen">
+    <div class="flex justify-between">
+      <h2
+        class="relative left-40 mb-8 text-2xl font-bold text-white dark:text-white"
+      >
+        Blog Posts
+      </h2>
+      <div class="relative max-w-xl w-full hidden md:block right-40 mb-4">
+        <div
+          class="absolute start-0 top-3 flex items-center ps-3 pointer-events-none"
+        >
+          <svg
+            class="w-4 h-4 text-gray-500 dark:text-gray-400"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 20 20"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+            />
+          </svg>
+          <span class="sr-only">Search icon</span>
+        </div>
+        <input
+          type="text"
+          id="search-navbar"
+          class="block w-full p-2 ps-10 text-sm text-black border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Search..."
+          (input)="onSearch($event)"
+        />
+      </div>
+    </div>
+
+    <!-- blog container?
+    <div *ngIf="filteredBlogs && filteredBlogs.length > 0; else noBlogs">
+      <div
+        *ngFor="let blog of filteredBlogs"
+        class="dark:bg-gray-100 dark:text-white"
+      >
+        <div
+          class="container max-w-4xl px-10 py-6 mx-auto rounded-lg shadow-sm dark:bg-gray-50"
+        >
+          <div class="flex items-center justify-between">
+            <div>
+              <a rel="noopener noreferrer" class="flex items-center gap-2">
+                <span class="hover:underline dark:text-gray-600">{{
+                  blog.author
+                }}</span>
+              </a>
+            </div>
+            <span class="text-sm dark:text-gray-600">{{
+              blog.date_uploaded | date : "longDate"
+            }}</span>
+          </div>
+          <div class="mt-3">
+            <a
+              (click)="goToBlog(blog.id)"
+              rel="noopener noreferrer"
+              class="text-2xl font-bold hover:underline cursor-pointer"
+              >{{ blog.title }}</a
+            >
+            @if(blog.description.length > maxChar) {
+            <p class="mt-2">
+              {{ truncateDescription(blog.description, maxChar) }}
+            </p>
+            <button
+              (click)="goToBlog(blog.id)"
+              class="text-gray-500 mt-1 hover:underline"
+            >
+              Read more
+            </button>
+            }@else {
+            <p class="mt-2">
+              {{ blog.description }}
+            </p>
+            }
+            <div class="mt-3.5">
+              <span
+                *ngFor="let tag of blog.tags ? blog.tags.split(',') : []"
+                class="bg-gray-100 text-white text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 border border-gray-400"
+              >
+                {{ tag.trim() }}</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div *ngIf="filteredBlogs && filteredBlogs.length > 0; else noBlogs">
+      <div
+        class="max-w-4xl px-6 py-16 mx-auto space-y-12 mt-3 bg-[#222222] rounded-md"
+        *ngFor="let blog of filteredBlogs"
+      >
+        <article class="space-y-8 text-white">
+          <div class="space-y-6">
+            <h1
+              class="text-4xl font-bold md:tracking-tight md:text-5xl hover:underline cursor-pointer"
+              (click)="goToBlog(blog.id)"
+            >
+              {{ blog.title }}
+            </h1>
+            <div
+              class="flex flex-col items-start justify-between w-full md:flex-row md:items-center dark:text-gray-600"
+            >
+              <div class="flex items-center md:space-x-2">
+                <img
+                  src="./../../../assets/avatar.jpg"
+                  alt=""
+                  class="w-6 h-6 border rounded-full dark:bg-gray-500 dark:border-gray-300"
+                />
+                <p class="text-sm">{{ blog.author }}</p>
+              </div>
+              <p class="flex-shrink-0 mt-3 text-sm md:mt-0">
+                {{ blog.date_uploaded | date : "longDate" }}
+              </p>
+            </div>
+          </div>
+          <div class="text-white font-semibold">
+            @if(blog.description.length > maxChar) {
+            <p class="mt-2">
+              {{ truncateDescription(blog.description, maxChar) }}
+            </p>
+            <button
+              (click)="goToBlog(blog.id)"
+              class="text-gray-500 mt-1 hover:underline"
+            >
+              Read more
+            </button>
+            }@else {
+            <p class="mt-2">
+              {{ blog.description }}
+            </p>
+            }
+          </div>
+        </article>
+        <div>
+          <div
+            class="flex flex-wrap py-6 gap-2 border-t border-dashed dark:border-gray-600"
+          >
+            <span
+              *ngFor="let tag of blog.tags ? blog.tags.split(',') : []"
+              rel="noopener noreferrer"
+              class="px-3 py-1 hover:underline bg-blue-700 rounded-md text-white font-bold"
+              >#{{ tag.trim() }}</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #noBlogs>
+    <section class="bg-white dark:bg-gray-900">
+      <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+        <div class="mx-auto max-w-screen-sm text-center">
+          <h1
+            class="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-primary-600 dark:text-primary-500"
+          >
+            Oops! No Blogs Yet
+          </h1>
+          <p class="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
+            It looks like we haven't posted any blogs yet. Don't worry, we'll
+            have some great content for you soon! In the meantime, feel free to
+            explore our homepage or check back later for updates.
+          </p>
+        </div>
+      </div>
+    </section>
+  </ng-template>
+</aside>
+
+<!-- {
+  "id": 25,
+  "title": "My First Blog Post",
+  "description": "This is a dummy blog post used for testing the API.",
+  "image": null,
+  "user_id": 24,
+  "date_uploaded": "2024-10-06 10:44:30",
+  "author": "DumbWyz123",
+  "tags": null
+} -->

@@ -1,0 +1,90 @@
+<app-navbar></app-navbar>
+<main
+  class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-[#141414] max-h-screen antialiased"
+>
+  <div class="flex justify-between px-4 mx-auto max-w-screen-xl relative">
+    <div class="absolute right-48 top-5 flex gap-2">
+      <button (click)="toggleDropdown()" class="text-white">
+        <svg
+          class="w-4 h-4"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 16 3"
+        >
+          <path
+            d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"
+          />
+        </svg>
+        <span class="sr-only">Blog settings</span>
+      </button>
+      <div
+        *ngIf="isDropdownOpen"
+        class="absolute right-6 -top-3.5 z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+      >
+        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
+          <li
+            (click)="editPost(blog.id)"
+            *ngIf="isAuthor"
+            class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+          >
+            Edit
+          </li>
+          <li
+            (click)="deletePost(blog.id)"
+            *ngIf="isAuthor"
+            class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+          >
+            Delete
+          </li>
+        </ul>
+      </div>
+    </div>
+    <article
+      class="text-justify mx-auto w-full max-w-4xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert"
+    >
+      <header class="mb-4 lg:mb-6 not-format">
+        <address class="flex items-center mb-6 not-italic">
+          <div class="inline-flex items-center mr-3 text-sm text-white">
+            <img
+              class="mr-4 w-16 h-16 rounded-full"
+              src="./assets/avatar.jpg"
+              alt="Jese Leos"
+            />
+            <div>
+              <a rel="author" class="text-xl font-bold text-white">{{
+                blog.author
+              }}</a>
+
+              <p class="text-base text-white">
+                <time
+                  pubdate
+                  datetime="2022-02-08"
+                  title="February 8th, 2022"
+                  >{{ blog.date_uploaded | date : "longDate" }}</time
+                >
+              </p>
+            </div>
+          </div>
+        </address>
+        <h1
+          class="mb-4 text-3xl font-extrabold leading-tight lg:mb-6 lg:text-4xl text-white"
+        >
+          {{ blog.title }}
+        </h1>
+      </header>
+      <p class="lead text-white">
+        {{ blog.description }}
+      </p>
+      <div class="mt-3.5">
+        <span
+          *ngFor="let tag of blog.tags ? blog.tags.split(',') : []"
+          class="text-sm font-medium me-2 px-2.5 py-0.5 rounded bg-blue-700 text-white"
+        >
+          #{{ tag.trim() }}</span
+        >
+      </div>
+    </article>
+  </div>
+  <app-comment></app-comment>
+</main>
