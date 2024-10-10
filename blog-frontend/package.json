@@ -19,10 +19,12 @@
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
     "@auth0/angular-jwt": "^5.2.0",
+    "@tinymce/tinymce-angular": "^8.0.1",
     "flowbite": "^2.5.1",
     "jwt-decode": "^4.0.0",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.14.1",
+    "tinymce": "^7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
   },

@@ -6,6 +6,7 @@ import { BlogComponent } from './pages/blog/blog.component';
 import { EditComponent } from './components/edit/edit.component';
 import { AccountComponent } from './pages/account/account.component';
 import { CreateblogComponent } from './components/createblog/createblog.component';
+import { BlogFormComponent } from './components/blog-form/blog-form.component';
 
 export const routes: Routes = [
   {
